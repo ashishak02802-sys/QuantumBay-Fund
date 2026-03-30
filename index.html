@@ -10,9 +10,49 @@
 body{font-family:'Poppins',sans-serif;background:#0b0f1a;color:#e6e8ee}
 
 /* NAVBAR */
-nav{position:fixed;width:100%;top:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);padding:15px 40px;display:flex;justify-content:space-between;z-index:1000}
-nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:14px}
-nav a:hover{color:#00d4ff}
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  flex-wrap: wrap;
+}
+
+nav .logo {
+  font-size: 20px;
+  color: #fff;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  transition: max-height 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+nav .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+nav .nav-links a:hover {
+  color: #00d4ff;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+}
 
 /* HERO */
 header{height:100vh;background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.9)),url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3') center/cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
@@ -46,18 +86,50 @@ footer{text-align:center;padding:20px;background:#05070d;color:#aaa}
 /* ANIMATIONS */
 .fade-in{opacity:0;transform:translateY(20px);animation:fadeIn 1s ease forwards}
 @keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  nav {
+    padding: 10px 20px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    margin-top: 10px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.05); /* glass effect */
+    backdrop-filter: blur(15px);
+    padding: 0 15px;
+  }
+
+  .nav-links a {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  .nav-links.active {
+    max-height: 500px; /* enough to show all links */
+  }
+}
 </style>
 </head>
 <body>
 
 <nav>
-<div><b>QuantumBay</b></div>
-<div>
-<a href="#about">About Us</a>
-<a href="#strategy">Strategy</a>
-<a href="#Eligibility">Eligibility</a>
-<a href="#contact">Contact</a>
-</div>
+  <div class="logo"><b>QuantumBay</b></div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="nav-links">
+    <a href="#about">About Us</a>
+    <a href="#strategy">Strategy</a>
+    <a href="#Eligibility">Eligibility</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
 <header>
@@ -254,11 +326,16 @@ own independent assessment and seek professional advice before making any invest
 
 </section>
 
-
-
 <footer>
 <p>© 2026 QuantumBay Fund | All Rights Reserved</p>
 </footer>
+
+<script>
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  navLinks.classList.toggle('active');
+}
+</script>
 
 </body>
 </html>
